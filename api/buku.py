@@ -4,7 +4,9 @@ from model.kategori import Kategori
 from model.kategori_buku import Kategori_Buku
 from model.reting import Reting
 from config import db
-from flask import jsonify, request
+from flask import jsonify, request, current_app
+import os
+import base64
 
 
 @api.route('/buku/kategori', methods=['GET'])
@@ -35,14 +37,20 @@ def buku(id):
 
 @api.route('/buku/add', methods=['POST'])
 def addBuku():
+    cover = request.json['cover']
+    filename = request.json['filename']
     judul =  request.json['judul']
     sinopsis =  request.json['sinopsis']
     harga =  int(request.json['harga'])
     stok =  int(request.json['stok'])
-    cover =  request.json['cover']
     kategori = request.json['kategori']
     try:
         buku = Buku(judul=judul, sinopsis=sinopsis, harga=harga, stok=stok, filename=cover)
+        _, encoded = cover.split(',', 1)
+        image_data = base64.b64decode(encoded)
+        filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], buku.cover)
+        with open(filepath, 'wb') as f:
+            f.write(image_data)
         db.session.add(buku)
         for kat in kategori:
             ket = str(kat).lower().strip()

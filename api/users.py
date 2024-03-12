@@ -41,3 +41,22 @@ def register():
             return jsonify({'message' : 'registrasi berhasil'})
     except Exception as e:
         return jsonify({'message' : 'registrasi gagal', 'ex' : str(e), })
+
+@api.route('/user/addpegawai', methods=['POST'])
+def addPegawai():
+    nama = request.json['nama']
+    username= request.json['username']
+    password= request.json['password']
+    telepon = request.json['telepon']
+    level = request.json['level']
+    try:
+        user = Users(nama=nama, username=username, password=password, telepon=telepon, level=level)
+        check = db.session.query(Users).filter_by(username=username).first()
+        if check:
+            return jsonify({'message' : 'username tidak tersdia'})
+        else:
+            db.session.add(user)
+            db.session.commit()
+            return jsonify({'message' : 'registrasi berhasil'})
+    except Exception as e:
+        return jsonify({'message' : 'registrasi gagal', 'ex' : str(e), })

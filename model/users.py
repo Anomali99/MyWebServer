@@ -31,6 +31,8 @@ class Users(db.Model):
         self.telepon = telepon
         if level is not None:
             self.level = level 
+        else:
+            self.level = 'user' 
 
     def json(self):
         return {
