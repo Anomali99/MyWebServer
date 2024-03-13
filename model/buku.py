@@ -2,9 +2,8 @@ from config import db
 from datetime import date, datetime
 from .kategori_buku import Kategori_Buku 
 from .kategori import Kategori
-from PIL import Image
+from .reting import Reting
 from flask import current_app
-from io import BytesIO
 import os
 import base64
 import imghdr
@@ -51,19 +50,19 @@ class Buku(db.Model):
         self.stok = stok
         self.cover = coverName(filename)
 
-    def kategori(self):
+    def getkategori(self):
         bk = db.session.query(Kategori, Kategori_Buku).join(Kategori_Buku, Kategori.id == Kategori_Buku.id_kategori).filter(Kategori_Buku.id_buku==self.id)
         kategori = [k.Kategori.kategori for k in bk]
         return kategori
+
+    def getreting(self):
+        bk = db.session.query(Reting).filter(Reting.id_buku==self.id)
+        reting = [k.json() for k in bk]
+        return reting
     
     def getCover(self):
-        image_path = os.path.join(current_app.config['UPLOAD_FOLDER'], self.cover)
-        with open(image_path, 'rb') as image_file:
-            image = Image.open(image_file)
-            buffered = BytesIO()
-            image.save(buffered)
-            image_base64 = base64.b64encode(buffered.getvalue()).decode('utf-8')
-        return image_base64
+        image_path = os.path.join("http://127.0.0.1:5000",current_app.config['UPLOAD_FOLDER'], self.cover)
+        return image_path
 
     def json(self):
         return {
@@ -74,5 +73,6 @@ class Buku(db.Model):
             'stok' : self.stok,
             'cover' : self.getCover(),
             'tanggal' : self.tanggal,
-            'kategori' : self.kategori()
+            'kategori' : self.getkategori(),
+            'reting' : self.getreting()
         }
