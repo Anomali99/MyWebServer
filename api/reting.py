@@ -7,7 +7,7 @@ from flask import jsonify, request
 def addReting(idBuku):
     nilai  = int(request.json['nilai'])
     komentar  = request.json['komentar']
-    id_user  = request.json['id_users']
+    id_user  = request.json['id_user']
     try:
         rate = Reting(id_buku=idBuku, id_user=id_user, nilai=nilai, komentar=komentar)
         db.session.add(rate)

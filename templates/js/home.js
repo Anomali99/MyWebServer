@@ -1,4 +1,3 @@
-var allbuku = null;
 // Toggle class active untuk hamburger menu
 const navbarNav = document.querySelector(".navbar-nav");
 // ketika hamburger menu di klik
@@ -22,6 +21,7 @@ document.querySelector("#shopping-cart-button").onclick = (e) => {
   shoppingCart.classList.toggle("active");
   e.preventDefault();
 };
+refresKeranjang();
 
 // Klik di luar elemen
 const hm = document.querySelector("#menu");
@@ -42,96 +42,10 @@ document.addEventListener("click", function (e) {
   }
 });
 
-// Modal Box
-const addRetingModal = document.querySelector("#add-reting-modal");
-const itemDetailModal = document.querySelector("#item-detail-modal");
-const judulModal = document.querySelector("#judul-modal");
-const sinopsisModal = document.querySelector("#sinopsis-modal");
-const hargaModal = document.querySelector("#harga-modal");
-const gambarModal = document.querySelector("#image-modal");
-const kategoriModal = document.querySelector("#kategori-modal");
-const btnAddKomen = document.querySelector("#btn-add-komen");
-const btnSubmit = document.querySelector("#submitBtn");
-const judulKomentar = document.querySelector("#judulreting");
-
 function detail(id) {
-  var data = null;
-  this.allbuku.forEach((item) => {
-    if (item.id == id) {
-      data = item;
-    }
-  });
-  gambarModal.src = data.cover;
-  gambarModal.alt = data.judul;
-  judulModal.innerHTML = data.judul;
-  sinopsisModal.innerHTML = data.sinopsis;
-  hargaModal.innerHTML = "IDR " + data.harga;
-  kategoriModal.innerHTML = data.kategori.join(", ");
-  judulKomentar.innerHTML = "Komentari " + data.judul;
-  btnAddKomen.onclick = function () {
-    addKomen(id);
-  };
-  itemDetailModal.style.display = "flex";
+  localStorage.setItem("currentBuku", JSON.stringify({ id: id }));
+  window.location.href = "detail.html";
 }
-
-function addKomen(id) {
-  btnSubmit.onclick = function () {
-    submitForm(id);
-  };
-  addRetingModal.style.display = "flex";
-}
-
-function retingclose() {
-  addRetingModal.style.display = "none";
-}
-
-function submitForm(id) {
-  var nilai = document.getElementById("nilai").value;
-  var komentar = document.getElementById("komentar").value;
-  var id_user = userId;
-
-  formData = {
-    nilai: nilai,
-    komentar: komentar,
-    id_user: id_user,
-  };
-
-  fetch("http://127.0.0.1:5000/" + id + "/add", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formData),
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
-    })
-    .then((data) => {
-      console.log(data);
-      if (!data.message) {
-        addRetingModal.style.display = "none";
-      }
-    })
-    .catch((error) => {
-      console.error("There was a problem with the fetch operation:", error);
-    });
-}
-
-// klik tombol close modal
-document.querySelector(".modal .close-icon").onclick = (e) => {
-  itemDetailModal.style.display = "none";
-  e.preventDefault();
-};
-
-// klik di luar modal
-window.onclick = (e) => {
-  if (e.target === itemDetailModal) {
-    itemDetailModal.style.display = "none";
-  }
-};
 
 const loginInfoString = localStorage.getItem("loginInfo");
 if (loginInfoString) {
@@ -139,6 +53,8 @@ if (loginInfoString) {
   const username = loginInfo.username;
   const userIdElement = document.getElementById("username");
   userIdElement.textContent = username;
+} else {
+  logout();
 }
 
 function logout() {
@@ -162,6 +78,7 @@ const produkLink = document.getElementById("produk");
 
 const userLevel = getLoginStatus().level;
 const userId = getLoginStatus().iduser;
+console.log(userId);
 
 if (userLevel == "pegawai") {
   transaksiLink.style.display = "inline-block";
@@ -188,7 +105,6 @@ fetch("http://127.0.0.1:5000/buku", {
   })
   .then((data) => {
     console.log(data);
-    this.allbuku = data;
     if (!data.message) {
       data.forEach((item) => {
         var productCard = document.createElement("div");
@@ -196,7 +112,11 @@ fetch("http://127.0.0.1:5000/buku", {
 
         productCard.innerHTML = `
         <div class="product-icons">
-          <a href="#"><i data-feather="shopping-cart"></i></a>
+          <a href="#products" onclick="masukankeranjang('${item.id}', '${
+          item.judul
+        }', '${item.harga}', '${
+          item.cover
+        }')"><i data-feather="shopping-cart"></i></a>
           <a href="#products" class="item-detail-button"
           onclick="detail('${item.id}')"><i data-feather="eye"></i
           ></a>
@@ -218,3 +138,39 @@ fetch("http://127.0.0.1:5000/buku", {
   .catch((error) => {
     console.error("There was a problem with the fetch operation:", error);
   });
+
+function refresKeranjang() {
+  shoppingCart.innerHTML = "";
+  keranjang = JSON.parse(localStorage.getItem("keranjang"));
+  if (keranjang) {
+    keranjang.forEach((item) => {
+      var productCard = document.createElement("div");
+      productCard.className = "cart-item";
+      productCard.innerHTML = `
+          <img src="${item.cover}" alt="${item.judul}" />
+          <div class="item-detail">
+            <h3>${item.judul}</h3>
+            <div class="item-price">IDR ${item.harga}    </div>
+            <div class="item-price">jumlah: ${item.jumlah}</div>
+          </div>
+          <i data-feather="trash-2" class="remove-item"></i>
+  `;
+      shoppingCart.appendChild(productCard);
+      feather.replace();
+    });
+  }
+}
+
+function masukankeranjang(id, judul, harga, cover) {
+  keranjang = JSON.parse(localStorage.getItem("keranjang")) || [];
+  const produk = {
+    id: id,
+    judul: judul,
+    harga: harga,
+    cover: cover,
+    jumlah: 1,
+  };
+  keranjang.push(produk);
+  localStorage.setItem("keranjang", JSON.stringify(keranjang));
+  refresKeranjang();
+}

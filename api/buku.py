@@ -38,7 +38,6 @@ def buku(id):
 @api.route('/buku/add', methods=['POST'])
 def addBuku():
     cover = request.json['cover']
-    filename = request.json['filename']
     judul =  request.json['judul']
     sinopsis =  request.json['sinopsis']
     harga =  int(request.json['harga'])

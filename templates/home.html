@@ -47,32 +47,7 @@
       <!-- Search Form end -->
 
       <!-- Shopping Cart start -->
-      <div class="shopping-cart">
-        <div class="cart-item">
-          <img src="../static/upload/240312185255.jpeg" alt="Product 1" />
-          <div class="item-detail">
-            <h3>Product 1</h3>
-            <div class="item-price">IDR 30K</div>
-          </div>
-          <i data-feather="trash-2" class="remove-item"></i>
-        </div>
-        <div class="cart-item">
-          <img src="../static/upload/240312185255.jpeg" alt="Product 1" />
-          <div class="item-detail">
-            <h3>Product 1</h3>
-            <div class="item-price">IDR 30K</div>
-          </div>
-          <i data-feather="trash-2" class="remove-item"></i>
-        </div>
-        <div class="cart-item">
-          <img src="../static/upload/240312185255.jpeg" alt="Product 1" />
-          <div class="item-detail">
-            <h3>Product 1</h3>
-            <div class="item-price">IDR 30K</div>
-          </div>
-          <i data-feather="trash-2" class="remove-item"></i>
-        </div>
-      </div>
+      <div class="shopping-cart"></div>
       <!-- Shopping Cart end -->
     </nav>
     <!-- navbar -->
@@ -112,67 +87,6 @@
       </div>
     </footer>
     <!-- Footer end -->
-
-    <!-- Modal Box Item Detail start -->
-    <div class="modal" id="item-detail-modal">
-      <div class="modal-container">
-        <a href="#" class="close-icon"><i data-feather="x"></i></a>
-        <div class="modal-content">
-          <img src="" alt="" id="image-modal" />
-          <div class="product-content">
-            <h3 id="judul-modal"></h3>
-            <h6 id="kategori-modal"></h6>
-            <p id="sinopsis-modal"></p>
-            <div class="product-price" id="harga-modal"></div>
-            <div class="row">
-              <a href="#"
-                ><i data-feather="shopping-cart"></i>
-                <span>add to cart</span></a
-              >
-              <a href="#products" id="btn-add-komen"
-                ><i data-feather="message-square"></i>
-                <span>add comment</span></a
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Modal Box Item Detail end -->
-
-    <!-- Modal Box add reting start -->
-    <div class="modal-reting" id="add-reting-modal">
-      <div class="modal-container-reting">
-        <a href="#" class="close-icon" onclick="retingclose()"
-          ><i data-feather="x"></i
-        ></a>
-        <h1 id="judulreting"></h1>
-        <form action="">
-          <div class="input-group">
-            <label for="komentar">Komentar</label>
-            <input
-              type="text"
-              placeholder="komentar"
-              id="komentar"
-              name="komentar"
-              required
-            />
-          </div>
-          <div class="input-group">
-            <label for="nilai">Nilai</label>
-            <input
-              type="number"
-              placeholder="nilai"
-              id="nilai"
-              name="nilai"
-              required
-            />
-          </div>
-          <button type="button" class="btn" id="submitBtn">Kirim</button>
-        </form>
-      </div>
-    </div>
-    <!-- Modal Box add reting end -->
 
     <script>
       feather.replace();

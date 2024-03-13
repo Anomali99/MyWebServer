@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Toko Buku</title>
+
+    <!-- fonts.google.com -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,700;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- fonts.google.com -->
+
+    <!-- feathericons.com -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    <!-- feathericons.com -->
+
+    <link rel="stylesheet" href="css/detail.css" />
+  </head>
+  <body>
+    <!-- navbar -->
+    <nav class="navbar">
+      <a href="#" class="navbar-logo">Toko<span>Buku</span></a>
+      <div class="navbar-extra">
+        <a href="#" id="search-button"><i data-feather="search"></i></a>
+        <a href="#" id="shopping-cart-button"
+          ><i data-feather="shopping-cart"></i
+        ></a>
+        <a href="#" id="menu"><i data-feather="menu"></i></a>
+      </div>
+      <div class="navbar-nav">
+        <a href="transkasi.html" id="transaksi">transaksi</a>
+        <a href="pegawai.html" id="pegawai">pegawai</a>
+        <a href="produk.html" id="produk">produk</a>
+        <a href="profil.html" id="username"></a>
+        <a href="#" onclick="logout()">logout</a>
+      </div>
+
+      <!-- Search Form start -->
+      <div class="search-form">
+        <input type="search" id="search-box" placeholder="search here..." />
+        <label for="search-box"><i data-feather="search"></i></label>
+      </div>
+      <!-- Search Form end -->
+
+      <!-- Shopping Cart start -->
+      <div class="shopping-cart">
+        <div class="cart-item">
+          <img src="../static/upload/240312185255.jpeg" alt="Product 1" />
+          <div class="item-detail">
+            <h3>Product 1</h3>
+            <div class="item-price">IDR 30K</div>
+          </div>
+          <i data-feather="trash-2" class="remove-item"></i>
+        </div>
+        <div class="cart-item">
+          <img src="../static/upload/240312185255.jpeg" alt="Product 1" />
+          <div class="item-detail">
+            <h3>Product 1</h3>
+            <div class="item-price">IDR 30K</div>
+          </div>
+          <i data-feather="trash-2" class="remove-item"></i>
+        </div>
+        <div class="cart-item">
+          <img src="../static/upload/240312185255.jpeg" alt="Product 1" />
+          <div class="item-detail">
+            <h3>Product 1</h3>
+            <div class="item-price">IDR 30K</div>
+          </div>
+          <i data-feather="trash-2" class="remove-item"></i>
+        </div>
+      </div>
+      <!-- Shopping Cart end -->
+    </nav>
+    <!-- navbar -->
+
+    <section id="about" class="about">
+      <h2 id="judulBuku"></h2>
+      <h5 id="kategoriBuku"></h5>
+
+      <div class="row">
+        <img id="img" src=""></img>
+        <div class="content">
+          <p id="sinopsis"></p>
+          <a href="#" class="btn">
+            <i data-feather="shopping-cart"></i> <span>add to cart</span>
+          </a>
+          <a href="#" class="btn" onclick="addKomen()">
+            <i data-feather="message-square" ></i> <span>add comment</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="reting">
+      <h2>Reting <span>Buku</span></h2>
+    </section>
+
+    <!-- Footer start -->
+    <footer>
+      <div class="socials">
+        <a href="#"><i data-feather="instagram"></i></a>
+        <a href="#"><i data-feather="twitter"></i></a>
+        <a href="#"><i data-feather="facebook"></i></a>
+      </div>
+
+      <div class="credit">
+        <p>Created by <a href="">kelompok2</a>. | &copy; 2024.</p>
+      </div>
+    </footer>
+    <!-- Footer end -->
+
+    <!-- Modal Box add reting start -->
+    <div class="modal-reting" id="add-reting-modal">
+      <div class="modal-container-reting">
+        <a href="#" class="close-icon" onclick="retingclose()"
+          ><i data-feather="x"></i
+        ></a>
+        <h1 id="judulreting"></h1>
+        <form action="">
+          <div class="input-group">
+            <label for="komentar">Komentar</label>
+            <input
+              type="text"
+              placeholder="komentar"
+              id="komentar"
+              name="komentar"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <label for="nilai">Nilai</label>
+            <input
+              type="number"
+              placeholder="nilai"
+              id="nilai"
+              name="nilai"
+              required
+            />
+          </div>
+          <button type="button" class="btn" id="submitBtn" onclick="kirimKomen()">Kirim</button>
+        </form>
+      </div>
+    </div>
+    <!-- Modal Box add reting end -->
+
+    <script>
+      feather.replace();
+    </script>
+    <script src="js/detail.js"></script>
+  </body>
+</html>
