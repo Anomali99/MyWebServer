@@ -1,4 +1,9 @@
 feather.replace();
+const loginInfoString = localStorage.getItem("loginInfo");
+if (loginInfoString) {
+  window.location.href = "home.html";
+}
+
 const navbarNav = document.querySelector(".navbar-nav");
 const menu = document.querySelector("#menu");
 
