@@ -1,0 +1,46 @@
+:root {
+  --primary: #b6895b;
+  --bg: #010101;
+}
+
+/* about */
+.about {
+  padding: 8rem 7% 1.4rem;
+}
+
+.about h2 {
+  text-align: center;
+  font-size: 2.6rem;
+  margin-bottom: 3rem;
+}
+
+.about h2 span {
+  color: var(--primary);
+}
+
+.about .row {
+  display: flex;
+}
+
+.about .row .content {
+  flex: 1 1 35rem;
+  padding: 0 1rem;
+}
+
+.about .row .content h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.about .row .content p {
+  margin-bottom: 0.8rem;
+  font-size: 1.3rem;
+  font-weight: 100;
+  line-height: 1.6;
+}
+
+.about .row .map {
+  flex: 1 1 45rem;
+  width: 100%;
+  object-fit: cover;
+}

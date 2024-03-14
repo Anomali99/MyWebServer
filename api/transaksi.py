@@ -7,11 +7,10 @@ from flask import jsonify, request
 @api.route('/transaksi/add', methods=['POST'])
 def addTrans():
     total = int(request.json['total'])
-    status = request.json['status']
     id_user = request.json['id_user']
     detail = request.json['detail']
     try:
-        trans = Transaksi(id_user=id_user, total=total, status=status)
+        trans = Transaksi(id_user=id_user, total=total, status='belum bayar')
         db.session.add(trans)
         for det in detail:
             subtotal = int(det['subtotal'])

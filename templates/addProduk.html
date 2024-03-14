@@ -18,6 +18,10 @@
     <script src="https://unpkg.com/feather-icons"></script>
     <!-- feathericons.com -->
 
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/navbar.css" />
+    <link rel="stylesheet" href="css/login.css" />
+    <link rel="stylesheet" href="css/detail.css" />
     <link rel="stylesheet" href="css/addProduk.css" />
   </head>
   <body>
@@ -33,11 +37,27 @@
       </div>
       <div class="navbar-nav">
         <a href="transkasi.html" id="transaksi">transaksi</a>
+        <a href="mytranskasi.html" id="myTransaksi">myTransaksi</a>
         <a href="pegawai.html" id="pegawai">pegawai</a>
         <a href="produk.html" id="produk">produk</a>
         <a href="profil.html" id="username"></a>
         <a href="#" onclick="logout()">logout</a>
       </div>
+
+      <!-- Search Form start -->
+      <div class="search-form">
+        <input type="search" id="search-box" placeholder="search here..." />
+        <label for="search-box"><i data-feather="search"></i></label>
+      </div>
+      <!-- Search Form end -->
+
+      <!-- Shopping Cart start -->
+      <div class="shopping-cart">
+        <button type="button" class="btn" onclick="beli()">Beli</button>
+        <h5 id="totalharga"></h5>
+        <div class="list-item" id="itemlist"></div>
+      </div>
+      <!-- Shopping Cart end -->
     </nav>
     <!-- navbar -->
 
@@ -92,10 +112,12 @@
             />
           </div>
           <div id="kategori">
+            <a href="#" onclick="addKategori()">+ Kategori</a>
           </div>
           <button type="button" class="btn" onclick="submitForm()">
             Simpan
           </button>
+        </form>
       </main>
     </section>
     <!-- Hero section -->
@@ -107,16 +129,44 @@
         <a href="#"><i data-feather="twitter"></i></a>
         <a href="#"><i data-feather="facebook"></i></a>
       </div>
-    
+
       <div class="credit">
         <p>Created by <a href="">kelompok2</a>. | &copy; 2024.</p>
       </div>
     </footer>
     <!-- Footer end -->
 
-    <script>
-      feather.replace();
-    </script>
+    <!-- Modal Box add reting start -->
+    <div class="modal-reting" id="add-reting-modal">
+      <div class="modal-container-reting">
+        <a href="#" class="close-icon" onclick="retingclose()"
+          ><i data-feather="x"></i
+        ></a>
+        <form action="">
+          <div class="input-group">
+            <label for="kategoriinput">Kategori</label>
+            <input
+              type="text"
+              placeholder="kategori"
+              id="kategoriinput"
+              name="kategoriinput"
+              required
+            />
+          </div>
+          <button
+            type="button"
+            class="btn"
+            id="submitBtn"
+            onclick="tamabahkategori()"
+          >
+            Tambah
+          </button>
+        </form>
+      </div>
+    </div>
+    <!-- Modal Box add reting end -->
+
+    <script src="js/navbar.js"></script>
     <script src="js/addProduk.js"></script>
   </body>
 </html>

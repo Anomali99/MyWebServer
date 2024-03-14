@@ -1,56 +1,5 @@
-const navbarNav = document.querySelector(".navbar-nav");
-const menu = document.querySelector("#menu");
-
-menu.onclick = () => {
-  navbarNav.classList.toggle("active");
-};
-
-document.addEventListener("click", function (e) {
-  if (!menu.contains(e.target) && !navbarNav.contains(e.target)) {
-    navbarNav.classList.remove("active");
-  }
-});
-
-const loginInfoString = localStorage.getItem("loginInfo");
-if (loginInfoString) {
-  const loginInfo = JSON.parse(loginInfoString);
-  const username = loginInfo.username;
-  const userIdElement = document.getElementById("username");
-  userIdElement.textContent = username;
-}
-
-function logout() {
-  localStorage.removeItem("loginInfo");
-  window.location.href = "index.html";
-}
-
-function getLoginStatus() {
-  const loginInfo = localStorage.getItem("loginInfo");
-
-  if (loginInfo) {
-    return JSON.parse(loginInfo);
-  } else {
-    return { status: false, iduser: null, username: null, level: null };
-  }
-}
-
-const transaksiLink = document.getElementById("transaksi");
-const pegawaiLink = document.getElementById("pegawai");
-const produkLink = document.getElementById("produk");
-
-const userLevel = getLoginStatus().level;
-
-if (userLevel == "pegawai") {
-  transaksiLink.style.display = "inline-block";
-  pegawaiLink.style.display = "inline-block";
-  produkLink.style.display = "inline-block";
-} else {
-  transaksiLink.style.display = "none";
-  pegawaiLink.style.display = "none";
-  produkLink.style.display = "none";
-}
-
 const checkboxForm = document.getElementById("kategori");
+var kategori = null;
 fetch("http://127.0.0.1:5000/buku/kategori", {
   method: "GET",
   headers: {
@@ -66,6 +15,7 @@ fetch("http://127.0.0.1:5000/buku/kategori", {
   .then((data) => {
     console.log(data);
     if (!data.message) {
+      kategori = data;
       data.forEach((item) => {
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
@@ -154,4 +104,54 @@ function submitForm() {
     .catch((error) => {
       console.error("Error:", error.message);
     });
+}
+
+// Modal Box
+const itemDetailModal = document.querySelector("#add-reting-modal");
+
+function addKategori() {
+  itemDetailModal.style.display = "flex";
+}
+
+document.querySelector(
+  ".modal-reting .modal-container-reting .close-icon"
+).onclick = (e) => {
+  itemDetailModal.style.display = "none";
+  e.preventDefault();
+};
+
+window.onclick = (e) => {
+  if (e.target === itemDetailModal) {
+    itemDetailModal.style.display = "none";
+  }
+};
+
+function retingclose() {
+  itemDetailModal.style.display = "none";
+}
+
+function tamabahkategori() {
+  const kat = String(
+    document.querySelector("#kategoriinput").value
+  ).toLowerCase();
+  var ya = true;
+  if (kategori) {
+    kategori.forEach((k) => {
+      if (k.kategori.toLowerCase() == kat) {
+        ya = false;
+      }
+    });
+  }
+  if (ya) {
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.name = kat;
+    checkbox.value = kat;
+
+    const label = document.createElement("label");
+    label.appendChild(checkbox);
+    label.appendChild(document.createTextNode(` ${kat}`));
+
+    checkboxForm.appendChild(label);
+  }
 }

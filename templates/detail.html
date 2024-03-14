@@ -18,6 +18,9 @@
     <script src="https://unpkg.com/feather-icons"></script>
     <!-- feathericons.com -->
 
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/navbar.css" />
+    <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="css/detail.css" />
   </head>
   <body>
@@ -33,6 +36,7 @@
       </div>
       <div class="navbar-nav">
         <a href="transkasi.html" id="transaksi">transaksi</a>
+        <a href="mytranskasi.html" id="myTransaksi">myTransaksi</a>
         <a href="pegawai.html" id="pegawai">pegawai</a>
         <a href="produk.html" id="produk">produk</a>
         <a href="profil.html" id="username"></a>
@@ -48,30 +52,9 @@
 
       <!-- Shopping Cart start -->
       <div class="shopping-cart">
-        <div class="cart-item">
-          <img src="../static/upload/240312185255.jpeg" alt="Product 1" />
-          <div class="item-detail">
-            <h3>Product 1</h3>
-            <div class="item-price">IDR 30K</div>
-          </div>
-          <i data-feather="trash-2" class="remove-item"></i>
-        </div>
-        <div class="cart-item">
-          <img src="../static/upload/240312185255.jpeg" alt="Product 1" />
-          <div class="item-detail">
-            <h3>Product 1</h3>
-            <div class="item-price">IDR 30K</div>
-          </div>
-          <i data-feather="trash-2" class="remove-item"></i>
-        </div>
-        <div class="cart-item">
-          <img src="../static/upload/240312185255.jpeg" alt="Product 1" />
-          <div class="item-detail">
-            <h3>Product 1</h3>
-            <div class="item-price">IDR 30K</div>
-          </div>
-          <i data-feather="trash-2" class="remove-item"></i>
-        </div>
+        <button type="button" class="btn" onclick="beli()">Beli</button>
+        <h5 id="totalharga"></h5>
+        <div class="list-item" id="itemlist"></div>
       </div>
       <!-- Shopping Cart end -->
     </nav>
@@ -147,9 +130,7 @@
     </div>
     <!-- Modal Box add reting end -->
 
-    <script>
-      feather.replace();
-    </script>
+    <script src="js/navbar.js"></script>
     <script src="js/detail.js"></script>
   </body>
 </html>

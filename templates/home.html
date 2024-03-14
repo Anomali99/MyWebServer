@@ -18,6 +18,8 @@
     <script src="https://unpkg.com/feather-icons"></script>
     <!-- feathericons.com -->
 
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/navbar.css" />
     <link rel="stylesheet" href="css/home.css" />
   </head>
   <body>
@@ -33,6 +35,7 @@
       </div>
       <div class="navbar-nav">
         <a href="transkasi.html" id="transaksi">transaksi</a>
+        <a href="mytranskasi.html" id="myTransaksi">myTransaksi</a>
         <a href="pegawai.html" id="pegawai">pegawai</a>
         <a href="produk.html" id="produk">produk</a>
         <a href="profil.html" id="username"></a>
@@ -47,7 +50,11 @@
       <!-- Search Form end -->
 
       <!-- Shopping Cart start -->
-      <div class="shopping-cart"></div>
+      <div class="shopping-cart">
+        <button type="button" class="btn" onclick="beli()">Beli</button>
+        <h5 id="totalharga"></h5>
+        <div class="list-item" id="itemlist"></div>
+      </div>
       <!-- Shopping Cart end -->
     </nav>
     <!-- navbar -->
@@ -88,9 +95,7 @@
     </footer>
     <!-- Footer end -->
 
-    <script>
-      feather.replace();
-    </script>
+    <script src="js/navbar.js"></script>
     <script src="js/home.js"></script>
   </body>
 </html>

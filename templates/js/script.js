@@ -1,3 +1,4 @@
+feather.replace();
 const navbarNav = document.querySelector(".navbar-nav");
 const menu = document.querySelector("#menu");
 
