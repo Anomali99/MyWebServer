@@ -7,7 +7,7 @@ function submitForm() {
     password: password,
   };
 
-  fetch("http://192.168.68.219:5127/user/login", {
+  fetch("https://192.168.68.219:5127/user/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
