@@ -1,7 +1,7 @@
 const idBuku = JSON.parse(localStorage.getItem("currentBuku")).id;
 console.log(idBuku);
 
-fetch("http://127.0.0.1:5000/buku/" + idBuku, {
+fetch("http://192.168.68.219:5127/buku/" + idBuku, {
   method: "GET",
   headers: {
     "Content-Type": "application/json",
@@ -77,7 +77,7 @@ function kirimKomen() {
     id_user: id_user,
   };
 
-  fetch("http://127.0.0.1:5000/reting/" + idBuku + "/add", {
+  fetch("http://192.168.68.219:5127/reting/" + idBuku + "/add", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

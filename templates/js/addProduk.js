@@ -1,6 +1,5 @@
 const checkboxForm = document.getElementById("kategori");
-var kategori = null;
-fetch("http://127.0.0.1:5000/buku/kategori", {
+fetch("http://192.168.68.219:5127/buku/kategori", {
   method: "GET",
   headers: {
     "Content-Type": "application/json",
@@ -15,7 +14,6 @@ fetch("http://127.0.0.1:5000/buku/kategori", {
   .then((data) => {
     console.log(data);
     if (!data.message) {
-      kategori = data;
       data.forEach((item) => {
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
@@ -78,7 +76,7 @@ function submitForm() {
         filename: filename,
       };
 
-      fetch("http://127.0.0.1:5000/buku/add", {
+      fetch("http://192.168.68.219:5127/buku/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -134,10 +132,15 @@ function tamabahkategori() {
   const kat = String(
     document.querySelector("#kategoriinput").value
   ).toLowerCase();
+  const checkboxes = checkboxForm.querySelectorAll('input[type="checkbox"]');
+  console.log(checkboxes);
+  const checkedValues = Array.from(checkboxes).map(
+    (checkbox) => checkbox.value
+  );
   var ya = true;
-  if (kategori) {
-    kategori.forEach((k) => {
-      if (k.kategori.toLowerCase() == kat) {
+  if (checkedValues) {
+    checkedValues.forEach((k) => {
+      if (k.toLowerCase() == kat) {
         ya = false;
       }
     });

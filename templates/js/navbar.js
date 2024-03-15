@@ -179,7 +179,7 @@ function beli() {
         detail: detail,
       })
     );
-    fetch("http://127.0.0.1:5000/transaksi/add", {
+    fetch("http://192.168.68.219:5127/transaksi/add", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -61,7 +61,7 @@ class Buku(db.Model):
         return reting
     
     def getCover(self):
-        image_path = f"http://127.0.0.1:5000/{current_app.config['UPLOAD_FOLDER']}/{self.cover}" 
+        image_path = f"hhttp://192.168.68.219:5127/{current_app.config['UPLOAD_FOLDER']}/{self.cover}" 
         return image_path
 
     def json(self):

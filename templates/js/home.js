@@ -14,7 +14,7 @@ function getLoginStatus() {
 }
 
 const allproduk = document.getElementById("allproduk");
-fetch("http://127.0.0.1:5000/buku", {
+fetch("http://192.168.68.219:5127/buku", {
   method: "GET",
   headers: {
     "Content-Type": "application/json",
