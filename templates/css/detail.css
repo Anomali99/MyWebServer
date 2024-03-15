@@ -64,6 +64,7 @@
   padding: 1.2rem;
   border: 1px solid #666;
   width: 80%;
+  height: max-content;
   animation: animateModal 0.5s;
 }
 

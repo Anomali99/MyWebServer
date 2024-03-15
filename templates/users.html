@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="css/navbar.css" />
     <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="css/detail.css" />
+    <link rel="stylesheet" href="css/users.css" />
   </head>
   <body>
     <!-- navbar -->
@@ -37,7 +38,7 @@
       <div class="navbar-nav">
         <a href="transkasi.html" id="transaksi">transaksi</a>
         <a href="mytranskasi.html" id="myTransaksi">myTransaksi</a>
-        <a href="pegawai.html" id="pegawai">pegawai</a>
+        <a href="#" id="pegawai">users</a>
         <a href="produk.html" id="produk">produk</a>
         <a href="profil.html" id="username"></a>
         <a href="#" onclick="logout()">logout</a>
@@ -67,7 +68,7 @@
         <p>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Saepe, vel.
         </p>
-        <a href="addProduk.html" class="cta">+ tambah user</a>
+        <a href="#" class="cta" onclick="adduser()">+ tambah user</a>
       </main>
     </section>
     <!-- Hero section -->
@@ -91,30 +92,70 @@
     <!-- Footer end -->
 
     <!-- Modal Box add reting start -->
-    <!-- <div class="modal-reting" id="add-reting-modal">
+    <div class="modal-reting" id="add-reting-modal">
       <div class="modal-container-reting">
         <a href="#" class="close-icon" onclick="retingclose()"
           ><i data-feather="x"></i
         ></a>
-        <h1 id="judulreting"></h1>
+        <h1 id="judulModal"></h1>
         <form action="">
-          <div class="input-group">
-            <label for="komentar">Komentar</label>
+          <div class="input-group" id="div-id">
+            <label for="id_user">id user</label>
             <input
               type="text"
-              placeholder="komentar"
-              id="komentar"
-              name="komentar"
+              placeholder="id_user"
+              id="id_user"
+              name="id_user"
               required
             />
           </div>
           <div class="input-group">
-            <label for="nilai">Nilai</label>
+            <label for="nama">nama</label>
+            <input
+              type="text"
+              placeholder="nama"
+              id="nama"
+              name="nama"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <label for="usernameInput">username</label>
+            <input
+              type="text"
+              placeholder="username"
+              id="usernameInput"
+              name="usernameInput"
+              required
+            />
+          </div>
+          <div class="input-group" id="div-level">
+            <label for="level">level</label>
+            <input
+              type="text"
+              placeholder="level"
+              id="level"
+              name="level"
+              required
+            />
+          </div>
+          <div class="input-group" id="div-password">
+            <label for="password">password</label>
+            <input
+              type="password"
+              placeholder="password"
+              id="password"
+              name="password"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <label for="telepon">telepon</label>
             <input
               type="number"
-              placeholder="nilai"
-              id="nilai"
-              name="nilai"
+              placeholder="telepon"
+              id="telepon"
+              name="telepon"
               required
             />
           </div>
@@ -122,13 +163,13 @@
             type="button"
             class="btn"
             id="submitBtn"
-            onclick="kirimKomen()"
+            onclick="tambahkan()"
           >
-            Kirim
+            tambah pegawai
           </button>
         </form>
       </div>
-    </div> -->
+    </div>
     <!-- Modal Box add reting end -->
 
     <script src="js/navbar.js"></script>
