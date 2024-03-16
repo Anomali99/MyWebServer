@@ -96,6 +96,12 @@ function adduser() {
   levelInput.value = "";
   passwordInput.value = "";
   teleponInput.value = "";
+
+  id_userInput.removeAttribute("readonly", true);
+  namaInput.removeAttribute("readonly", true);
+  usernameInput.removeAttribute("readonly", true);
+  levelInput.removeAttribute("readonly", true);
+  teleponInput.removeAttribute("readonly", true);
 }
 
 function detailuser(id) {
@@ -171,7 +177,7 @@ function tambahkan() {
     .then((data) => {
       console.log(data);
       if (!data.message) {
-        // window.location.href = "login.html";
+        window.location.href = "users.html";
       }
     })
     .catch((error) => {

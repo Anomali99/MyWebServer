@@ -18,8 +18,8 @@ const shoppingCart = document.querySelector(".shopping-cart");
 document.querySelector("#shopping-cart-button").onclick = (e) => {
   shoppingCart.classList.toggle("active");
   e.preventDefault();
+  refresKeranjang();
 };
-refresKeranjang();
 
 const hm = document.querySelector("#menu");
 const sb = document.querySelector("#search-button");
@@ -100,7 +100,7 @@ function refresKeranjang() {
               <div class="item-price">IDR ${item.harga}    </div>
               <div class="item-price">jumlah: ${item.jumlah}</div>
             </div>
-            <i data-feather="trash-2" class="remove-item" onclick="hapuskeranjanh('${item.id}')"></i>
+            <i data-feather="trash-2" class="remove-item" onclick="hapuskeranjang('${item.id}')"></i>
     `;
       listItem.appendChild(productCard);
       feather.replace();
@@ -143,10 +143,9 @@ function masukankeranjang(id, judul, harga, cover) {
     keranjang.push(produk);
   }
   localStorage.setItem("keranjang", JSON.stringify(keranjang));
-  refresKeranjang();
 }
 
-function hapuskeranjanh(id) {
+function hapuskeranjang(id) {
   keranjang = [];
   JSON.parse(localStorage.getItem("keranjang")).forEach((buku) => {
     if (buku.id != id) {
@@ -154,7 +153,6 @@ function hapuskeranjanh(id) {
     }
   });
   localStorage.setItem("keranjang", JSON.stringify(keranjang));
-  refresKeranjang();
 }
 
 function beli() {

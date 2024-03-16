@@ -1,6 +1,10 @@
 const idBuku = JSON.parse(localStorage.getItem("currentBuku")).id;
-var buku = null;
 console.log(idBuku);
+
+const judul = document.getElementById("bukuJudul");
+const sinopsis = document.getElementById("sinopsisBuku");
+const harga = document.getElementById("harga");
+const stok = document.getElementById("stok");
 
 fetch("http://192.168.68.219:5127/buku/" + idBuku, {
   method: "GET",
@@ -17,12 +21,12 @@ fetch("http://192.168.68.219:5127/buku/" + idBuku, {
   .then((data) => {
     console.log(data);
     if (!data.message) {
-      buku = data;
       document.getElementById("img").src = data.cover;
       document.getElementById("judulBuku").innerHTML = data.judul;
       document.getElementById("kategoriBuku").innerHTML =
         "kategori : " + data.kategori.join(", ");
       document.getElementById("sinopsis").innerHTML = data.sinopsis;
+
       data.reting.forEach((item) => {
         var productCard = document.createElement("div");
         productCard.className = "product-card";
@@ -38,11 +42,41 @@ fetch("http://192.168.68.219:5127/buku/" + idBuku, {
       `;
         document.getElementById("reting").appendChild(productCard);
       });
+
+      judul.value = data.judul;
+      sinopsis.value = data.sinopsis;
+      harga.value = data.harga;
+      stok.value = data.stok;
     }
   })
   .catch((error) => {
     console.error("There was a problem with the fetch operation:", error);
   });
+
+function hapusBuku() {
+  fetch("http://192.168.68.219:5127/buku/" + idBuku + "/remove", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      if (data.message != "buku gagal dihapus") {
+        hapuskeranjang(idBuku);
+        window.location.href = "produk.html";
+      }
+    })
+    .catch((error) => {
+      console.error("There was a problem with the fetch operation:", error);
+    });
+}
 
 // Modal Box
 const itemDetailModal = document.querySelector("#add-reting-modal");
@@ -64,22 +98,16 @@ window.onclick = (e) => {
   }
 };
 
-function retingclose() {
-  itemDetailModal.style.display = "none";
-}
-
-function kirimKomen() {
-  var nilai = document.getElementById("nilai").value;
-  var komentar = document.getElementById("komentar").value;
-  var id_user = JSON.parse(localStorage.getItem("loginInfo")).iduser;
-
+function simpanperubahan() {
   var formData = {
-    nilai: nilai,
-    komentar: komentar,
-    id_user: id_user,
+    judul: judul.value,
+    sinopsis: sinopsis.value,
+    harga: harga.value,
+    stok: stok.value,
   };
+  console.log(JSON.stringify(formData));
 
-  fetch("http://192.168.68.219:5127/reting/" + idBuku + "/add", {
+  fetch("http://192.168.68.219:5127/buku/" + idBuku + "/edit", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -95,14 +123,10 @@ function kirimKomen() {
     .then((data) => {
       console.log(data);
       if (!data.message) {
-        window.location.href = "login.html";
+        // window.location.href = "login.html";
       }
     })
     .catch((error) => {
       console.error("There was a problem with the fetch operation:", error);
     });
-}
-
-function tambakankekeranjang() {
-  masukankeranjang(buku.id, buku.judul, buku.harga, buku.cover);
 }

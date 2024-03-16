@@ -3,6 +3,7 @@ from model.buku import Buku
 from model.kategori import Kategori
 from model.kategori_buku import Kategori_Buku
 from model.reting import Reting
+from model.detail_transaksi import Detail_Transaksi
 from config import db
 from flask import jsonify, request, current_app
 import os
@@ -27,6 +28,26 @@ def bukuAll():
     else:
         return  jsonify({'message' : 'tidak ada buku'})
 
+@api.route('/buku/<id>/remove', methods=['GET'])
+def hapusbuku(id):
+    buku = db.session.query(Buku).filter_by(id=id).first()
+    kategori = db.session.query(Kategori_Buku).filter(Kategori_Buku.id_buku==id).all()
+    reting = db.session.query(Reting).filter(Reting.id_buku==id).all()
+    detail = db.session.query(Detail_Transaksi).filter(Detail_Transaksi.id_buku==id)
+    if buku:
+        for kat in kategori:
+            db.session.delete(kat)
+        for ret in reting:
+            db.session.delete(ret)
+        for det in detail:
+            db.session.delete(det)
+        db.session.delete(buku)
+        db.session.commit()
+        os.remove(os.path.join(current_app.config['UPLOAD_FOLDER'], buku.cover))
+        return  jsonify({'message' : 'buku berhasil dihapus'})
+    else:
+        return  jsonify({'message' : 'buku gagal dihapus'})
+
 @api.route('/buku/<id>', methods=['GET'])
 def buku(id):
     buku = db.session.query(Buku).filter_by(id=id).first()
@@ -34,6 +55,24 @@ def buku(id):
         return jsonify(buku.json())
     else:
         return  jsonify({'message' : 'tidak ada buku'})
+
+@api.route('/buku/<id>/edit', methods=['POST'])
+def editbuku(id):
+    judul =  request.json['judul']
+    sinopsis =  request.json['sinopsis']
+    harga =  int(request.json['harga'])
+    stok =  int(request.json['stok'])
+    buku = db.session.query(Buku).filter_by(id=id).first()
+    if buku:
+        buku.judul = judul
+        buku.sinopsis = sinopsis
+        buku.harga = harga
+        buku.stok = stok
+        db.session.merge(buku)
+        db.session.commit()
+        return  jsonify({'message' : 'berhasil mengedit buku'})
+    else:
+        return  jsonify({'message' : 'gagal mengedit buku'})
 
 @api.route('/buku/add', methods=['POST'])
 def addBuku():

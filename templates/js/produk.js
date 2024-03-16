@@ -1,6 +1,6 @@
-function detail(id) {
+function edit(id) {
   localStorage.setItem("currentBuku", JSON.stringify({ id: id }));
-  window.location.href = "detail.html";
+  window.location.href = "editProduk.html";
 }
 
 const allproduk = document.getElementById("allproduk");
@@ -25,13 +25,8 @@ fetch("http://192.168.68.219:5127/buku", {
 
         productCard.innerHTML = `
         <div class="product-icons">
-          <a href="#products" onclick="masukankeranjang('${item.id}', '${
-          item.judul
-        }', '${item.harga}', '${
-          item.cover
-        }')"><i data-feather="shopping-cart"></i></a>
           <a href="#products" class="item-detail-button"
-          onclick="detail('${item.id}')"><i data-feather="eye"></i
+          onclick="edit('${item.id}')"><i data-feather="edit-2"></i
           ></a>
         </div>
         <div class="product-image">
