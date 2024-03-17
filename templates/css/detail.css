@@ -109,12 +109,17 @@
   color: var(--primary);
   font-size: 700;
 }
+.modal-reting .modal-container-reting form .input-group select,
 .modal-reting .modal-container-reting form .input-group input {
   width: 100%;
   padding: 2rem;
   font-size: 1.7rem;
   background: none;
   color: #fff;
+}
+
+.modal-reting .modal-container-reting form .input-group select option {
+  background-color: black;
 }
 
 .modal-reting .modal-container-reting form .btn {

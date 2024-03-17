@@ -32,10 +32,23 @@ def allTrans():
     else:
         return  jsonify({'message' : 'tidak ada transaksi'})
 
-@api.route('/transaksi/<id>', methods=['GET'])
-def Trans(id):
-    trans = db.session.query(Transaksi).filter(Transaksi.id==id).first()
+@api.route('/transaksi/all/<idUser>', methods=['GET'])
+def allTransUser(idUser):
+    trans = db.session.query(Transaksi).filter(Transaksi.id_user==idUser).all()
     if trans:
-        return jsonify(trans.json())
+        data = [t.json() for t in trans]
+        return jsonify(data)
     else:
         return  jsonify({'message' : 'tidak ada transaksi'})
+
+@api.route('/transaksi/<id>/edit', methods=['POST'])
+def Trans(id):
+    status = request.json['status']
+    trans = db.session.query(Transaksi).filter(Transaksi.id==id).first()
+    if trans:
+        trans.status = status
+        db.session.merge(trans)
+        db.session.commit()
+        return  jsonify({'message' : 'transaksi berhasil diubah'})
+    else:
+        return  jsonify({'message' : 'transaksi gagal diubah'})
