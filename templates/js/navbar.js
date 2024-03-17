@@ -94,14 +94,14 @@ function refresKeranjang() {
       var productCard = document.createElement("div");
       productCard.className = "cart-item";
       productCard.innerHTML = `
-            <img src="${item.cover}" alt="${item.judul}" />
-            <div class="item-detail">
-              <h3>${item.judul}</h3>
-              <div class="item-price">IDR ${item.harga}    </div>
-              <div class="item-price">jumlah: ${item.jumlah}</div>
-            </div>
-            <i data-feather="trash-2" class="remove-item" onclick="hapuskeranjang('${item.id}')"></i>
-    `;
+      <img src="${item.cover}" alt="${item.judul}" />
+      <div class="item-detail">
+      <h3>${item.judul}</h3>
+      <div class="item-price">IDR ${item.harga}    </div>
+      <div class="item-price">jumlah: ${item.jumlah}</div>
+      </div>
+      <i data-feather="trash-2" class="remove-item" onclick="hapuskeranjang('${item.id}')"></i>
+      `;
       listItem.appendChild(productCard);
       feather.replace();
     });
@@ -205,4 +205,10 @@ function beli() {
         console.error("There was a problem with the fetch operation:", error);
       });
   }
+}
+
+const cariinput = document.querySelector("#search-box");
+function caribuku() {
+  localStorage.setItem("caribuku", JSON.stringify({ key: cariinput.value }));
+  window.location.href = "cari.html";
 }

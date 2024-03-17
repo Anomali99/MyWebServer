@@ -4,6 +4,7 @@ from model.kategori import Kategori
 from model.kategori_buku import Kategori_Buku
 from model.reting import Reting
 from model.detail_transaksi import Detail_Transaksi
+from sqlalchemy import and_, or_
 from config import db
 from flask import jsonify, request, current_app
 import os
@@ -53,6 +54,15 @@ def buku(id):
     buku = db.session.query(Buku).filter_by(id=id).first()
     if buku:
         return jsonify(buku.json())
+    else:
+        return  jsonify({'message' : 'tidak ada buku'})
+
+@api.route('/buku/cari/<key>', methods=['GET'])
+def caribuku(key):
+    buku = db.session.query(Buku).outerjoin(Kategori_Buku, Kategori_Buku.id_buku == Buku.id).outerjoin(Kategori, Kategori.id == Kategori_Buku.id_kategori).filter(or_(Buku.judul.ilike(f"%{key}%"), Kategori.kategori.ilike(f"%{key}%"))).all()
+    if buku:
+        data = [buk.json() for buk in buku]
+        return jsonify(data)
     else:
         return  jsonify({'message' : 'tidak ada buku'})
 

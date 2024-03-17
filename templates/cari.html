@@ -20,14 +20,12 @@
 
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/navbar.css" />
-    <link rel="stylesheet" href="css/index.css" />
-    <link rel="stylesheet" href="css/detail.css" />
-    <link rel="stylesheet" href="css/users.css" />
+    <link rel="stylesheet" href="css/home.css" />
   </head>
   <body>
     <!-- navbar -->
     <nav class="navbar">
-      <a href="home.html" class="navbar-logo">Toko<span>Buku</span></a>
+      <a href="#" class="navbar-logo">Toko<span>Buku</span></a>
       <div class="navbar-extra">
         <a href="#" id="search-button"><i data-feather="search"></i></a>
         <a href="#" id="shopping-cart-button"
@@ -38,7 +36,7 @@
       <div class="navbar-nav">
         <a href="transaksi.html" id="transaksi">transaksi</a>
         <a href="mytransaksi.html" id="myTransaksi">myTransaksi</a>
-        <a href="#" id="pegawai">users</a>
+        <a href="users.html" id="pegawai">users</a>
         <a href="produk.html" id="produk">produk</a>
         <a href="profil.html" id="username"></a>
         <a href="#" onclick="logout()">logout</a>
@@ -70,14 +68,20 @@
         <p>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Saepe, vel.
         </p>
-        <a href="#" class="cta" onclick="adduser()">+ tambah user</a>
       </main>
     </section>
     <!-- Hero section -->
 
-    <section class="about" id="reting">
-      <h2><span>Users</span> Toko Buku</h2>
+    <!-- Products Section start -->
+    <section class="products" id="products">
+      <h2><span>Produk Unggulan</span> Kami</h2>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo unde eum,
+        ab fuga possimus iste.
+      </p>
+      <div class="row" id="allproduk"></div>
     </section>
+    <!-- Products Section end -->
 
     <!-- Footer start -->
     <footer>
@@ -93,88 +97,7 @@
     </footer>
     <!-- Footer end -->
 
-    <!-- Modal Box add reting start -->
-    <div class="modal-reting" id="add-reting-modal">
-      <div class="modal-container-reting">
-        <a href="#" class="close-icon" onclick="retingclose()"
-          ><i data-feather="x"></i
-        ></a>
-        <h1 id="judulModal"></h1>
-        <form action="">
-          <div class="input-group" id="div-id">
-            <label for="id_user">id user</label>
-            <input
-              type="text"
-              placeholder="id_user"
-              id="id_user"
-              name="id_user"
-              required
-            />
-          </div>
-          <div class="input-group">
-            <label for="nama">nama</label>
-            <input
-              type="text"
-              placeholder="nama"
-              id="nama"
-              name="nama"
-              required
-            />
-          </div>
-          <div class="input-group">
-            <label for="usernameInput">username</label>
-            <input
-              type="text"
-              placeholder="username"
-              id="usernameInput"
-              name="usernameInput"
-              required
-            />
-          </div>
-          <div class="input-group" id="div-level">
-            <label for="level">level</label>
-            <input
-              type="text"
-              placeholder="level"
-              id="level"
-              name="level"
-              required
-            />
-          </div>
-          <div class="input-group" id="div-password">
-            <label for="password">password</label>
-            <input
-              type="password"
-              placeholder="password"
-              id="password"
-              name="password"
-              required
-            />
-          </div>
-          <div class="input-group">
-            <label for="telepon">telepon</label>
-            <input
-              type="number"
-              placeholder="telepon"
-              id="telepon"
-              name="telepon"
-              required
-            />
-          </div>
-          <button
-            type="button"
-            class="btn"
-            id="submitBtn"
-            onclick="tambahkan()"
-          >
-            tambah pegawai
-          </button>
-        </form>
-      </div>
-    </div>
-    <!-- Modal Box add reting end -->
-
     <script src="js/navbar.js"></script>
-    <script src="js/users.js"></script>
+    <script src="js/cari.js"></script>
   </body>
 </html>
