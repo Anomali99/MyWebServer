@@ -1,4 +1,5 @@
 feather.replace();
+
 const loginInfoString = localStorage.getItem("loginInfo");
 if (loginInfoString) {
   window.location.href = "home.html";

@@ -1,5 +1,5 @@
 const checkboxForm = document.getElementById("kategori");
-fetch("http://192.168.68.219:5127/buku/kategori", {
+fetch("http://" + IPserver + ":" + PORTserver + "/buku/kategori", {
   method: "GET",
   headers: {
     "Content-Type": "application/json",
@@ -76,7 +76,7 @@ function submitForm() {
         filename: filename,
       };
 
-      fetch("http://192.168.68.219:5127/buku/add", {
+      fetch("http://" + IPserver + ":" + PORTserver + "/buku/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

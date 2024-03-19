@@ -14,7 +14,7 @@ function detail(id) {
 }
 
 const allproduk = document.getElementById("allproduk");
-fetch("http://192.168.68.219:5127/buku/cari/" + keycari().key, {
+fetch("http://" + IPserver + ":" + PORTserver + "/buku/cari/" + keycari().key, {
   method: "GET",
   headers: {
     "Content-Type": "application/json",

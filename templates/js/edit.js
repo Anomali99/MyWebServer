@@ -6,7 +6,7 @@ const sinopsis = document.getElementById("sinopsisBuku");
 const harga = document.getElementById("harga");
 const stok = document.getElementById("stok");
 
-fetch("http://192.168.68.219:5127/buku/" + idBuku, {
+fetch("http://" + IPserver + ":" + PORTserver + "/buku/" + idBuku, {
   method: "GET",
   headers: {
     "Content-Type": "application/json",
@@ -54,12 +54,15 @@ fetch("http://192.168.68.219:5127/buku/" + idBuku, {
   });
 
 function hapusBuku() {
-  fetch("http://192.168.68.219:5127/buku/" + idBuku + "/remove", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
+  fetch(
+    "http://" + IPserver + ":" + PORTserver + "/buku/" + idBuku + "/remove",
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  )
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -107,7 +110,7 @@ function simpanperubahan() {
   };
   console.log(JSON.stringify(formData));
 
-  fetch("http://192.168.68.219:5127/buku/" + idBuku + "/edit", {
+  fetch("http://" + IPserver + ":" + PORTserver + "/buku/" + idBuku + "/edit", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

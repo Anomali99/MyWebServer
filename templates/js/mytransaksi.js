@@ -11,7 +11,7 @@ function getLoginStatus() {
 }
 const idUser = getLoginStatus().iduser;
 
-fetch("http://192.168.68.219:5127/transaksi/all/" + idUser, {
+fetch("http://" + IPserver + ":" + PORTserver + "/transaksi/all/" + idUser, {
   method: "GET",
   headers: {
     "Content-Type": "application/json",
@@ -143,13 +143,16 @@ function simpan() {
 
   console.log(formData);
 
-  fetch("http://192.168.68.219:5127/transaksi/" + idTrans + "/edit", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formData),
-  })
+  fetch(
+    "http://" + IPserver + ":" + PORTserver + "/transaksi/" + idTrans + "/edit",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    }
+  )
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");

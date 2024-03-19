@@ -2,7 +2,7 @@ const idBuku = JSON.parse(localStorage.getItem("currentBuku")).id;
 var buku = null;
 console.log(idBuku);
 
-fetch("http://192.168.68.219:5127/buku/" + idBuku, {
+fetch("http://" + IPserver + ":" + PORTserver + "/buku/" + idBuku, {
   method: "GET",
   headers: {
     "Content-Type": "application/json",
@@ -79,13 +79,16 @@ function kirimKomen() {
     id_user: id_user,
   };
 
-  fetch("http://192.168.68.219:5127/reting/" + idBuku + "/add", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formData),
-  })
+  fetch(
+    "http://" + IPserver + ":" + PORTserver + "/reting/" + idBuku + "/add",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    }
+  )
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");

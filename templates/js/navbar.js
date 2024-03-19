@@ -1,5 +1,18 @@
 feather.replace();
 
+function getIpServer() {
+  const IPserver = localStorage.getItem("IPserver");
+  if (IPserver) {
+    console.log(IPserver);
+    return JSON.parse(IPserver);
+  } else {
+    return { status: false, iduser: null, username: null, level: null };
+  }
+}
+
+const IPserver = getIpServer().ip;
+const PORTserver = getIpServer().port;
+
 const navbarNav = document.querySelector(".navbar-nav");
 document.querySelector("#menu").onclick = () => {
   navbarNav.classList.toggle("active");
@@ -177,7 +190,7 @@ function beli() {
         detail: detail,
       })
     );
-    fetch("http://192.168.68.219:5127/transaksi/add", {
+    fetch("http://" + IPserver + ":" + PORTserver + "/transaksi/add", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

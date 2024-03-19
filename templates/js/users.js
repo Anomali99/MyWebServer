@@ -1,6 +1,6 @@
 var users = null;
 
-fetch("http://192.168.68.219:5127/user", {
+fetch("http://" + IPserver + ":" + PORTserver + "/user", {
   method: "GET",
   headers: {
     "Content-Type": "application/json",
@@ -43,7 +43,7 @@ fetch("http://192.168.68.219:5127/user", {
   });
 
 function hapus(id) {
-  fetch("http://192.168.68.219:5127/user/" + id + "/remove", {
+  fetch("http://" + IPserver + ":" + PORTserver + "/user/" + id + "/remove", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -161,7 +161,7 @@ function tambahkan() {
     telepon: telepon,
   };
 
-  fetch("http://192.168.68.219:5127/user/addpegawai", {
+  fetch("http://" + IPserver + ":" + PORTserver + "/user/addpegawai", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

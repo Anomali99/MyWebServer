@@ -1,3 +1,16 @@
+function getIpServer() {
+  const IPserver = localStorage.getItem("IPserver");
+  if (IPserver) {
+    console.log(IPserver);
+    return JSON.parse(IPserver);
+  } else {
+    return { status: false, iduser: null, username: null, level: null };
+  }
+}
+
+const IPserver = getIpServer().ip;
+const PORTserver = getIpServer().port;
+
 function submitForm() {
   var username = document.getElementById("username").value;
   var password = document.getElementById("password").value;
@@ -11,7 +24,7 @@ function submitForm() {
     telepon: telepon,
   };
 
-  fetch("http://192.168.68.219:5127/user/register", {
+  fetch("http://" + IPserver + ":" + PORTserver + "/user/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
