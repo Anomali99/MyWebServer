@@ -4,7 +4,7 @@ from .kategori_buku import Kategori_Buku
 from .kategori import Kategori
 from .reting import Reting
 from flask import current_app
-import os
+import socket
 import base64
 import imghdr
 
@@ -61,7 +61,8 @@ class Buku(db.Model):
         return reting
     
     def getCover(self):
-        image_path = f"http://192.168.68.219:5127/{current_app.config['UPLOAD_FOLDER']}/{self.cover}" 
+        IPaddress = socket.gethostbyname(socket.gethostname())
+        image_path = f"http://{IPaddress}/{current_app.config['UPLOAD_FOLDER']}/{self.cover}" 
         return image_path
 
     def json(self):
