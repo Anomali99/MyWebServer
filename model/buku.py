@@ -62,7 +62,7 @@ class Buku(db.Model):
     
     def getCover(self):
         IPaddress = socket.gethostbyname(socket.gethostname())
-        image_path = f"http://{IPaddress}/{current_app.config['UPLOAD_FOLDER']}/{self.cover}" 
+        image_path = f"http://{IPaddress}:5127/{current_app.config['UPLOAD_FOLDER']}/{self.cover}" 
         return image_path
 
     def json(self):
